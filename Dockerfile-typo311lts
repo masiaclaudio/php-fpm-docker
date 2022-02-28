@@ -63,6 +63,12 @@ RUN apk add --update --no-cache autoconf build-base imagemagick imagemagick-dev 
     && apk del autoconf build-base \
     && rm -rf /var/cache/apk/*
 
+# Install Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php \
+    && php -r "unlink('composer-setup.php');" \
+    && mv composer.phar /usr/bin/composer
+
 # Install bash (for basic level of shell compatibility) that will be required by entrypoint later
 # Install gettext (for envsubst command) that will be required by entrypoint later
 # Install ssmtp
