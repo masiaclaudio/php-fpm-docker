@@ -52,11 +52,13 @@ RUN apk add --update \
 # Install gettext (for envsubst command) that will be required by entrypoint later
 # Install ssmtp
 # Install shadow package (for usermod command)
+# Install tzdata package to change timezone via env var TZ=Europe/Rome
 RUN apk add --update \
         bash \
         gettext \
         ssmtp \
         shadow \
+        tzdata \
     && rm -rf /var/cache/apk/*
 
 # Setup server document root and home directories
