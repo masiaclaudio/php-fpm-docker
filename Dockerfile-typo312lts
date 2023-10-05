@@ -49,10 +49,10 @@ RUN apk add --update \
     && rm -rf /var/cache/apk/*
 
 # Install extra php extensions: bcmath, gmp, bz2, imap, soap, sockets, shmop, xmlrpc, exif, zip, intl
-RUN apk add --update gmp-dev bzip2-dev imap-dev libxml2-dev libzip-dev icu-dev \
+RUN apk add --update gmp-dev bzip2-dev imap-dev libxml2-dev libzip-dev icu-dev linux-headers\
     && docker-php-ext-configure intl \
     && NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
-    && docker-php-ext-install -j${NPROC} bcmath gmp bz2 imap soap sockets shmop xmlrpc exif zip intl \
+    && docker-php-ext-install -j${NPROC} bcmath gmp bz2 imap soap sockets shmop exif zip intl \
     && rm -rf /var/cache/apk/*
 
 # Install extra pecl extensions: apcu, apcu_bc*, imagick, redis
